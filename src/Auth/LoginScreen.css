@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+
+.Login {
+  background: linear-gradient(#033249, #ffffff);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginGlassContainer {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(208, 115, 70, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 75px 300px;
+}
+
+.loginGlassContainer > h2 {
+  font-size: 65px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 75px;
+  font-family: "Work Sans", sans-serif;
+}
+
+.loginInput {
+  background-color: #fff;
+  height: 5vh;
+  width: 30vw;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  margin-bottom: 15px;
+  outline: none;
+  border: none;
+  font-family: "Work Sans", sans-serif;
+}
+
+.loginButton {
+  margin-left: auto;
+  margin-right: auto;
+  width: 27vw;
+  height: 6vh;
+  border-radius: 12px;
+  color: white;
+  border: none;
+  background-color: #2b507a;
+  margin-top: 20px;
+  cursor: pointer;
+  margin-bottom: 80px;
+}
+.loginButton > p {
+  font-weight: 600;
+  font-size: 20px;
+  font-family: "Work Sans", sans-serif;
+}
+
+.loginQuestion {
+  color: #fff;
+  font-size: 20px;
+  font-family: "Work Sans", sans-serif;
+}
+
+.loginRedirect {
+  color: #2e5090;
+  cursor: pointer;
+  font-family: "Work Sans", sans-serif;
+}

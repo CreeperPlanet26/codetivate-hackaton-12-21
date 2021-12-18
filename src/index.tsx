@@ -7,7 +7,7 @@ import RegisterScreen from "./Auth/RegisterScreen";
 
 ReactDOM.render(
   <React.StrictMode>
-    <RegisterScreen />
+    <LoginScreen />
   </React.StrictMode>,
   document.getElementById("root")
 );
