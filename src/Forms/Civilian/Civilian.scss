@@ -35,7 +35,6 @@
   }
 
   input {
-    background-color: #fff;
     height: 5vh;
     width: 30vw;
     border-radius: 12px;
@@ -48,13 +47,30 @@
     font-family: "Work Sans", sans-serif;
   }
 
+  .css-6j8wv5-Input > input {
+    height: 5vh;
+    width: 30vw;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    outline: none;
+    border: none;
+    font-family: "Work Sans", sans-serif;
+    color: #000;
+  }
+  div[class*="-option"] {
+    color: black;
+    // <div class=" css-26l3qy-menu" id="react-select-3-listbox"><div class=" css-4ljt47-MenuList"><div class=" css-1n7v3ny-option" aria-disabled="false" id="react-select-3-option-0" tabindex="-1">Evacuation Update</div><div class=" css-yt9ioa-option" aria-disabled="false" id="react-select-3-option-1" tabindex="-1">Shooter Location</div><div class=" css-yt9ioa-option" aria-disabled="false" id="react-select-3-option-2" tabindex="-1">Fatality Report</div><div class=" css-yt9ioa-option" aria-disabled="false" id="react-select-3-option-3" tabindex="-1">Injury Report</div></div></div>
+  }
+
   button {
     margin-left: auto;
     margin-right: auto;
     width: 27vw;
     height: 6vh;
     border-radius: 12px;
-    color: white;
     border: none;
     background-color: #2b507a;
     margin-top: 20px;
@@ -64,6 +80,7 @@
   button > p {
     font-weight: 600;
     font-size: 20px;
+    color: #fff;
     font-family: "Work Sans", sans-serif;
   }
 

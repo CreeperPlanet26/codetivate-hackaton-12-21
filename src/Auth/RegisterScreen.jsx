@@ -25,11 +25,15 @@ const RegisterScreen = () => {
             displayName: officerName.current.value,
           })
           .then(() =>
-            db.collection("officers").doc(auth.currentUser.uid).set({
-              name: officerName.current.value,
-              id: officerID.current.value,
-              department: policeDeptRef.current.value,
-            })
+            db
+              .collection("officers")
+              .doc(auth.currentUser.uid)
+              .set({
+                name: officerName.current.value,
+                id: officerID.current.value,
+                department: policeDeptRef.current.value,
+              })
+              .then(() => history.push("/dashboard"))
           )
           .catch((error) => console.log(error))
       )

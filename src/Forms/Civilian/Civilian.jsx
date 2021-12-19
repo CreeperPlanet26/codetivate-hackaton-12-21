@@ -25,12 +25,12 @@ const Civilian = () => {
 
   const getData = async () => {
     const res = await axios.get("https://geolocation-db.com/json/");
-    console.log(res.data);
     setIP(res.data.IPv4);
   };
 
   const today = new Date();
-  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
   React.useEffect(() => {
     //passing getData method to the lifecycle method
@@ -46,34 +46,72 @@ const Civilian = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    db.collection("schools").doc(schoolName.current.value).collection("Student Locations").set(
-      {
-        ip: ip,
-        name: studentName.current.value,
-        time_posted: time,
-        reason: selectedOptions.value,
-        description: descriptionRef.current.value,
-      },
-      { merge: true },
-    );
-    history.push("/home");
+    console.log("DEBUG 1");
+    db.collection("schools")
+      .doc(schoolName.current.value)
+      .collection(selectedOptions.value)
+      .doc(studentName.current.value)
+      .set(
+        {
+          ip: ip,
+          name: studentName.current.value,
+          time_posted: time,
+          reason: selectedOptions.value,
+          description: descriptionRef.current.value,
+        },
+        { merge: true }
+      )
+      .then(() => {
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <div className="CivilianPage">
       <div className="CivilianContainer">
         <h1>Help Form</h1>
-        <p>Fill out the information below, so law enforcement can better assist you.</p>
+        <p>
+          Fill out the information below, so law enforcement can better assist
+          you.
+        </p>
         <br />
-        <input ref={studentName} className="registerInput" type="text" placeholder="Name" />
-        <input ref={schoolName} className="registerInput" type="text" placeholder="Teacher" />
-        <input ref={teacherName} className="registerInput" type="text" placeholder="School" />
-        <input ref={cityRef} className="registerInput" type="text" placeholder="City" />
+        <input
+          ref={studentName}
+          className="registerInput"
+          type="text"
+          placeholder="Name"
+        />
+        <input
+          ref={schoolName}
+          className="registerInput"
+          type="text"
+          placeholder="Teacher"
+        />
+        <input
+          ref={teacherName}
+          className="registerInput"
+          type="text"
+          placeholder="School"
+        />
+        <input
+          ref={cityRef}
+          className="registerInput"
+          type="text"
+          placeholder="City"
+        />
         <p>Reason</p>
         <Select options={responses} onChange={handleChange} />
         <br />
         <p>Provide Brief Description</p>
-        <textarea ref={descriptionRef} cols="50" rows="10" placeholder="Type Description..."></textarea>
+        <textarea
+          ref={descriptionRef}
+          cols="50"
+          rows="10"
+          placeholder="Type Description..."
+        ></textarea>
         <button onClick={handleClick}>
           <p>Submit</p>
         </button>
