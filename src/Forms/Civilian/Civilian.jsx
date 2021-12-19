@@ -1,4 +1,4 @@
-// import "./Civilian.css";
+import "./Civilian.scss";
 import Select from "react-select";
 import React from "react";
 import { db } from "../../firebase";
@@ -60,7 +60,7 @@ const Civilian = () => {
   };
 
   return (
-    <div>
+    <div className="CivilianPage">
       <div className="CivilianContainer">
         <h1>Help Form</h1>
         <p>Fill out the information below, so law enforcement can better assist you.</p>
