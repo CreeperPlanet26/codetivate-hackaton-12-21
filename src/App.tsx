@@ -20,7 +20,7 @@ function App() {
     });
 
     return unsubscribe;
-  }, []);
+  }, [history]);
 
   return (
     <Router>
