@@ -1,20 +1,14 @@
-import "./App.css";
 import LoginScreen from "./Auth/LoginScreen";
-import {
-  Route,
-  BrowserRouter as Router,
-  Switch,
-  useHistory,
-} from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch, useHistory } from "react-router-dom";
 import PoliceDashboard from "./PoliceDashboard/PoliceDashboard";
-import HomePage from "./Home/HomePage";
+import { HomePage } from "./modules/home/HomePage";
 import RegisterScreen from "./Auth/RegisterScreen";
 import React from "react";
 import { auth } from "./firebase";
 import Civilian from "./Forms/Civilian/Civilian";
 
 function App() {
-  const [user, setUser] = React.useState();
+  const [user, setUser] = React.useState<boolean>();
   const history = useHistory();
 
   React.useEffect(() => {

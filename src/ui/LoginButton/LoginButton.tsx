@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 export const LoginButton = () => (
     <div className="login-button-ui-component">
-        <Link to="/dashboard">
+        <Link to="/login">
             <Button variant="contained" color="primary" >
-                View
+                Login
             </Button>
         </Link>
     </div>

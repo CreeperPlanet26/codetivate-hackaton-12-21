@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { navLinks } from "../../ui/NavBar/NavLinks";
 import { NavBar } from "../../ui/NavBar";
 import { LoginButton } from "../../ui/LoginButton";
+import { HelpPortalButton } from "../../ui/HelpPortalButton";
 
 
 export const HomePage = () => {
@@ -14,7 +15,7 @@ export const HomePage = () => {
             <NavBar isOpen={isOpen} setIsOpen={setIsOpen} />
             <nav>
                 <Link to="/">
-                    <Button className="tts-button">Shooter</Button>
+                    <Button className="tts-button">Assist</Button>
                 </Link>
 
                 <div className="links">
@@ -33,13 +34,17 @@ export const HomePage = () => {
 
             <div className="grid">
                 <div className="text">
-                    <h1>Shooter</h1>
+                    <h1>Assist</h1>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam quae velit provident aperiam itaque accusantium eveniet sunt labore quod at.
                     </p>
                     <section>
                         <div className="login-button">
                             <LoginButton />
+                        </div>
+
+                        <div className="join-button">
+                            <HelpPortalButton />
                         </div>
                     </section>
                 </div>
