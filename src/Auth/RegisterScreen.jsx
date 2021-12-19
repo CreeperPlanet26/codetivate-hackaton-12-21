@@ -1,6 +1,7 @@
 import React from "react";
 import { auth, db } from "../firebase";
 import "./RegisterScreen.css";
+import { useHistory } from "react-router-dom";
 
 const RegisterScreen = () => {
   const emailRef = React.useRef(null);
@@ -8,6 +9,8 @@ const RegisterScreen = () => {
   const policeDeptRef = React.useRef(null);
   const officerName = React.useRef(null);
   const officerID = React.useRef(null);
+
+  const history = useHistory();
 
   const register = (e) => {
     e.preventDefault();
@@ -72,7 +75,12 @@ const RegisterScreen = () => {
         </button>
         <p className="registerQuestion">
           Already have an account?{" "}
-          <span className="registerRedirect">Login!</span>
+          <span
+            className="registerRedirect"
+            onClick={() => history.push("/login")}
+          >
+            Login!
+          </span>
         </p>
       </div>
     </div>

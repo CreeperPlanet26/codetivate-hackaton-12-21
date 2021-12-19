@@ -1,6 +1,7 @@
 import React from "react";
 import { auth } from "../firebase";
 import "./LoginScreen.css";
+import { useHistory } from "react-router-dom";
 
 function LoginScreen() {
   const emailRef = React.useRef(null);
@@ -15,6 +16,8 @@ function LoginScreen() {
       )
       .catch((e) => alert(e.message));
   };
+
+  const history = useHistory();
 
   return (
     <div className="Login">
@@ -36,7 +39,13 @@ function LoginScreen() {
           <p>Login</p>
         </button>
         <p className="loginQuestion">
-          Don't have an account? <span className="loginRedirect">Sign Up!</span>
+          Don't have an account?{" "}
+          <span
+            className="loginRedirect"
+            onClick={() => history.push("/register")}
+          >
+            Sign Up!
+          </span>
         </p>
       </div>
     </div>
@@ -44,5 +53,3 @@ function LoginScreen() {
 }
 
 export default LoginScreen;
-
-// <input ref={emailRef} type="text" placeholder="Police Department" />

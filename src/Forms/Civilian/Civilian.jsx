@@ -4,7 +4,7 @@ import React from "react";
 import { db } from "../../firebase";
 import axios from "axios";
 
-import logo from "../../Assist_Logo.png";
+import { useHistory } from "react-router-dom";
 
 const Civilian = () => {
   const responses = [
@@ -13,6 +13,8 @@ const Civilian = () => {
     { label: "Fatality Report", value: "fatality_report" },
     { label: "Injury Report", value: "injury_report" },
   ];
+
+  const history = useHistory();
 
   const studentName = React.useRef(null);
   const schoolName = React.useRef(null);
@@ -58,6 +60,7 @@ const Civilian = () => {
         },
         { merge: true }
       );
+    history.push("/home");
   };
 
   return (
