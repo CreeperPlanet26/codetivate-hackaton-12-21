@@ -11,6 +11,7 @@ import RegisterScreen from "./Auth/RegisterScreen";
 import React from "react";
 import { auth } from "./firebase";
 import Civilian from "./Forms/Civilian/Civilian";
+import { AlarmPage } from "./modules/alarm/AlarmPage";
 
 function App() {
   const [user, setUser] = React.useState<boolean>(false);
@@ -46,6 +47,9 @@ function App() {
             </Route>
             <Route exact path="/help_portal">
               <Civilian />
+            </Route>
+            <Route exact path="/alarm">
+              <AlarmPage />
             </Route>
           </Switch>
         </Router>

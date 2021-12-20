@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
+import { db } from '../../firebase';
 import Pin from './Pin';
 
 export const Map = () => {
@@ -9,8 +10,12 @@ export const Map = () => {
         zoom: 8
     });
 
-    return (
+    useEffect(() => {
+        // fetch all of the docs from the schools collection here
+        // db.collection("schools").get().then(s => s.docs.map(doc => doc.data())).then(d => console.log(d[0]))
+    }, [])
 
+    return (
         <ReactMapGL
             {...viewport}
             width="100vw"

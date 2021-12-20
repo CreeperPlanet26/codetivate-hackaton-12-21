@@ -49,7 +49,7 @@ const Civilian = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    const chunks = descriptionRef.current.value.split(/\ ?\-\ ?/);
+    let chunks = descriptionRef.current.value.split(/\ ?\-\ ?/);
     chunks = chunks.slice(1);
     const res = chunks.map((str) => str.replaceAll("\n", ""));
     db.collection("schools")

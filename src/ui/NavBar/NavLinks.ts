@@ -17,4 +17,5 @@ export const navLinks: NavLink[] = [
     { name: "Dashboard", path: "/dashboard" },
     { name: "Help Portal", path: "/help_portal" },
     { name: "Register", path: "/register" },
+    { name: "Assist Alarm", path: "/alarm" },
 ];
