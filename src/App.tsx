@@ -11,7 +11,7 @@ import RegisterScreen from "./Auth/RegisterScreen";
 import React from "react";
 import { auth } from "./firebase";
 import Civilian from "./Forms/Civilian/Civilian";
-import { AlarmPage } from "./modules/alarm/AlarmPage";
+import AlarmPage from "./modules/alarm/AlarmPage";
 
 function App() {
   const [user, setUser] = React.useState<boolean>(false);
