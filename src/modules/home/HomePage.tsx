@@ -5,6 +5,7 @@ import { navLinks } from "../../ui/NavBar/NavLinks";
 import { NavBar } from "../../ui/NavBar";
 import { LoginButton } from "../../ui/LoginButton";
 import { HelpPortalButton } from "../../ui/HelpPortalButton";
+import { auth } from "../../firebase";
 
 export const HomePage = () => {
   const [isOpen, setIsOpen] = useState(false);

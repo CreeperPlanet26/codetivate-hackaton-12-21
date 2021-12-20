@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 function LoginScreen() {
   const emailRef = React.useRef(null);
   const passwordRef = React.useRef(null);
+  const history = useHistory();
 
   const signIn = (e) => {
     e.preventDefault();
@@ -14,10 +15,11 @@ function LoginScreen() {
         emailRef.current.value,
         passwordRef.current.value
       )
+      .then(() => {
+        history.push("/");
+      })
       .catch((e) => alert(e.message));
   };
-
-  const history = useHistory();
 
   return (
     <div className="Login">

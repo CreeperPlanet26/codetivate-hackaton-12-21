@@ -12,17 +12,18 @@ import React from "react";
 import { auth } from "./firebase";
 import Civilian from "./Forms/Civilian/Civilian";
 
-
-
 function App() {
-  const [user, setUser] = React.useState<boolean>();
+  const [user, setUser] = React.useState<boolean>(false);
   const history = useHistory();
 
   React.useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
         setUser(true);
-        history.push("/dashboard");
+        history.push("/");
+      } else {
+        setUser(false);
+        history.push("/");
       }
     });
 
@@ -30,27 +31,34 @@ function App() {
   }, [history]);
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route exact path="/register">
-          <RegisterScreen />
-        </Route>
-        <Route exact path="/login">
-          <LoginScreen />
-        </Route>
-        <Route exact path="/help_portal">
-          <Civilian />
-        </Route>
-      </Switch>
-      <Switch>
-        <Route exact path="/dashboard">
-          <PoliceDashboard />
-        </Route>
-      </Switch>
-    </Router>
+    <div>
+      {user === false ? (
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route exact path="/register">
+              <RegisterScreen />
+            </Route>
+            <Route exact path="/login">
+              <LoginScreen />
+            </Route>
+            <Route exact path="/help_portal">
+              <Civilian />
+            </Route>
+          </Switch>
+        </Router>
+      ) : (
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <PoliceDashboard />
+            </Route>
+          </Switch>
+        </Router>
+      )}
+    </div>
   );
 }
 
