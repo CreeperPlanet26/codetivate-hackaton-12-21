@@ -1,11 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
 
 .CivilianPage {
-  background-image: url(../../Assist_Logo.png);
+  background: #161826;
   height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+
+  .logo {
+    width: 10vw;
+    height: 12vh;
+    margin: 0;
+  }
 
   .CivilianContainer {
     backdrop-filter: blur(16px) saturate(180%);
@@ -17,7 +21,9 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 30px 10vw;
+    padding: 0 6vw;
+    margin: auto;
+    max-height: 95vh;
   }
 
   h1 {
@@ -35,13 +41,11 @@
   }
 
   input {
-    height: 5vh;
-    width: 30vw;
+    height: 10em;
+    width: 35em;
     border-radius: 12px;
     display: flex;
     align-items: center;
-    padding-left: 15px;
-    margin-bottom: 15px;
     outline: none;
     border: none;
     font-family: "Work Sans", sans-serif;
@@ -53,8 +57,6 @@
     border-radius: 12px;
     display: flex;
     align-items: center;
-    padding-left: 15px;
-    margin-bottom: 15px;
     outline: none;
     border: none;
     font-family: "Work Sans", sans-serif;
@@ -62,20 +64,20 @@
   }
   div[class*="-option"] {
     color: black;
-    // <div class=" css-26l3qy-menu" id="react-select-3-listbox"><div class=" css-4ljt47-MenuList"><div class=" css-1n7v3ny-option" aria-disabled="false" id="react-select-3-option-0" tabindex="-1">Evacuation Update</div><div class=" css-yt9ioa-option" aria-disabled="false" id="react-select-3-option-1" tabindex="-1">Shooter Location</div><div class=" css-yt9ioa-option" aria-disabled="false" id="react-select-3-option-2" tabindex="-1">Fatality Report</div><div class=" css-yt9ioa-option" aria-disabled="false" id="react-select-3-option-3" tabindex="-1">Injury Report</div></div></div>
+    font-family: "Work Sans", sans-serif;
   }
 
   button {
     margin-left: auto;
     margin-right: auto;
-    width: 27vw;
-    height: 6vh;
+    width: 15em;
+    height: 10em;
     border-radius: 12px;
     border: none;
     background-color: #2b507a;
     margin-top: 20px;
     cursor: pointer;
-    margin-bottom: 80px;
+    margin-bottom: 2em;
   }
   button > p {
     font-weight: 600;

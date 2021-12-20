@@ -3,6 +3,7 @@ import Select from "react-select";
 import React from "react";
 import { db } from "../../firebase";
 import axios from "axios";
+import logo from "../../Transparent_Logo.png";
 
 import { useHistory } from "react-router-dom";
 
@@ -21,11 +22,13 @@ const Civilian = () => {
   const teacherName = React.useRef(null);
   const cityRef = React.useRef(null);
   const descriptionRef = React.useRef(null);
-  const [ip, setIP] = React.useState("");
+  const stateRef = React.useRef(null);
+
+  const [latLong, setLatLong] = React.useState("");
 
   const getData = async () => {
     const res = await axios.get("https://geolocation-db.com/json/");
-    setIP(res.data.IPv4);
+    setLatLong({ lat: res.data.latitude, long: res.data.longitude });
   };
 
   const today = new Date();
@@ -53,7 +56,7 @@ const Civilian = () => {
       .doc(studentName.current.value)
       .set(
         {
-          ip: ip,
+          latLong: latLong,
           name: studentName.current.value,
           time_posted: time,
           reason: selectedOptions.value,
@@ -72,6 +75,7 @@ const Civilian = () => {
   return (
     <div className="CivilianPage">
       <div className="CivilianContainer">
+        <img src={logo} alt="ASSIST Logo" className="logo" />
         <h1>Help Form</h1>
         <p>
           Fill out the information below, so law enforcement can better assist
@@ -101,6 +105,12 @@ const Civilian = () => {
           className="registerInput"
           type="text"
           placeholder="City"
+        />
+        <input
+          ref={stateRef}
+          className="registerInput"
+          type="text"
+          placeholder="State"
         />
         <p>Reason</p>
         <Select options={responses} onChange={handleChange} />
