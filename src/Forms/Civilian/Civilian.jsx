@@ -36,7 +36,6 @@ const Civilian = () => {
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
   React.useEffect(() => {
-    //passing getData method to the lifecycle method
     getData();
   }, []);
 
@@ -49,7 +48,9 @@ const Civilian = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log("DEBUG 1");
+    const chunks = descriptionRef.current.value.split(/\ ?\-\ ?/);
+    chunks = chunks.slice(1);
+    const res = chunks.map((str) => str.replaceAll("\n", ""));
     db.collection("schools")
       .doc(schoolName.current.value)
       .collection(selectedOptions.value)
@@ -60,7 +61,7 @@ const Civilian = () => {
           name: studentName.current.value,
           time_posted: time,
           reason: selectedOptions.value,
-          description: descriptionRef.current.value,
+          description: res,
         },
         { merge: true }
       )
