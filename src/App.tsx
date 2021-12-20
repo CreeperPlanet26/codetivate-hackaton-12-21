@@ -12,6 +12,8 @@ import React from "react";
 import { auth } from "./firebase";
 import Civilian from "./Forms/Civilian/Civilian";
 
+
+
 function App() {
   const [user, setUser] = React.useState<boolean>();
   const history = useHistory();
