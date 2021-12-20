@@ -25,15 +25,16 @@ const Civilian = () => {
   const stateRef = React.useRef(null);
 
   const [latLong, setLatLong] = React.useState("");
+  const [state, setState] = React.useState("");
 
   const getData = async () => {
     const res = await axios.get("https://geolocation-db.com/json/");
     setLatLong({ lat: res.data.latitude, long: res.data.longitude });
+    setState(res.data.state);
   };
 
   const today = new Date();
-  const time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
   React.useEffect(() => {
     getData();
@@ -63,7 +64,7 @@ const Civilian = () => {
           reason: selectedOptions.value,
           description: res,
         },
-        { merge: true }
+        { merge: true },
       )
       .then(() => {
         history.push("/");
@@ -78,51 +79,18 @@ const Civilian = () => {
       <div className="CivilianContainer">
         <img src={logo} alt="ASSIST Logo" className="logo" />
         <h1>Help Form</h1>
-        <p>
-          Fill out the information below, so law enforcement can better assist
-          you.
-        </p>
+        <p>Fill out the information below, so law enforcement can better assist you.</p>
         <br />
-        <input
-          ref={studentName}
-          className="registerInput"
-          type="text"
-          placeholder="Name"
-        />
-        <input
-          ref={schoolName}
-          className="registerInput"
-          type="text"
-          placeholder="Teacher"
-        />
-        <input
-          ref={teacherName}
-          className="registerInput"
-          type="text"
-          placeholder="School"
-        />
-        <input
-          ref={cityRef}
-          className="registerInput"
-          type="text"
-          placeholder="City"
-        />
-        <input
-          ref={stateRef}
-          className="registerInput"
-          type="text"
-          placeholder="State"
-        />
+        <input ref={studentName} className="registerInput" type="text" placeholder="Name" />
+        <input ref={schoolName} className="registerInput" type="text" placeholder="Teacher" />
+        <input ref={teacherName} className="registerInput" type="text" placeholder="School" />
+        <input ref={cityRef} className="registerInput" type="text" placeholder="City" />
+        <input ref={stateRef} className="registerInput" type="text" placeholder="State" value={state} />
         <p>Reason</p>
         <Select options={responses} onChange={handleChange} />
         <br />
         <p>Provide Brief Description</p>
-        <textarea
-          ref={descriptionRef}
-          cols="50"
-          rows="10"
-          placeholder="Type Description..."
-        ></textarea>
+        <textarea ref={descriptionRef} cols="50" rows="10" placeholder="Type Description..."></textarea>
         <button onClick={handleClick}>
           <p>Submit</p>
         </button>

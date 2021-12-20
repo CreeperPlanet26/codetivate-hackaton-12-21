@@ -19,7 +19,7 @@ export const Map = () => {
             onViewportChange={(viewport) => setViewport(viewport)}
             mapboxApiAccessToken="pk.eyJ1IjoiY3JlZXBlcnBsYW5ldDI2IiwiYSI6ImNreGR6Y2Q4ODB2dWoyb29rMWdyMWNyOWoifQ.qQBt2nMDmB9NGcytGCpP7Q"
         >
-            <Marker latitude={37.78} longitude={-122.41} offsetLeft={-20} offsetTop={-10}>
+            <Marker latitude={37.78} longitude={-122.41}>
                 <Pin />
             </Marker>
         </ReactMapGL>
