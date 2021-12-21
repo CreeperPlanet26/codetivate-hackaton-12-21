@@ -24,7 +24,7 @@ export default function App() {
   const [modelLabels, setModelLabels] = React.useState(false);
   const [results, setResults] = React.useState([createData("Gunshots", 0), createData("Backround Noise", 0)]);
 
-  const URL = 'https://teachablemachine.withgoogle.com/models/Ax2P9oA-YJ/';
+  const URL = 'https://teachablemachine.withgoogle.com/models/rhU63TvgN/';
 
   function handleClick() {
     setLoading(!loading);
@@ -63,7 +63,9 @@ export default function App() {
           const resultsArray = [[createData("Gunshots", 0), createData("Backround Noise", 0)]]
           for (let i = 0; i < classLabels.length; i++) {
               //const classPrediction = classLabels[i] + ': ' + result.scores[i].toFixed(2);
-              resultsArray[i] = createData(classLabels[i], result.scores[i].toFixed(2));
+              resultsArray[i] = createData(classLabels[i], Math.floor(result.scores[i].toFixed(2)));
+              let gunshotPrediction = Math.floor(1-result.scores[1].toFixed(2));
+            resultsArray[classLabels.length+1]= createData("Gunshot", gunshotPrediction)
           }
           setResults(resultsArray);
           console.log(resultsArray);
