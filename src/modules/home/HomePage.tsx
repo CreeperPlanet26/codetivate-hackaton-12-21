@@ -14,7 +14,7 @@ export const HomePage = () => {
       <NavBar isOpen={isOpen} setIsOpen={setIsOpen} />
       <nav>
         <Link to="/">
-          <Button className="tts-button">Assist</Button>
+          <Button className="tts-button">ASSIST</Button>
         </Link>
 
         <div className="links">
