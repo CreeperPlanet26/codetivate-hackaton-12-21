@@ -30,22 +30,23 @@ const Civilian = () => {
 
   const getData = async () => {
     const { data } = await axios.get(
-      `http://api.positionstack.com/v1/reverse?access_key=9b3667b7b2f79edce871fb0f2368e5a7&query=${latLong.lat},${latLong.long}`,
+      `http://api.positionstack.com/v1/reverse?access_key=9b3667b7b2f79edce871fb0f2368e5a7&query=${latLong.lat},${latLong.long}`
     );
 
-    address.current = data.data[0].label;
-    city.current = data.data[0].locality;
+    address.current.value = data.data[0].label;
+    city.current.value = data.data[0].locality;
   };
 
   const today = new Date();
-  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
   React.useEffect(() => {
     navigator.geolocation?.getCurrentPosition((pos) =>
       setLatLong({
         lat: pos.coords.latitude,
         long: pos.coords.longitude,
-      }),
+      })
     );
 
     console.log(latLong);
@@ -69,7 +70,7 @@ const Civilian = () => {
     chunks = chunks.slice(1);
     const res = chunks.map((str) => str.replaceAll("\n", ""));
     db.collection("schools")
-      .doc(schoolName.current.value)
+      .doc(time)
       // .collection(selectedOptions.value)
       // .doc(studentName.current.value)
       .set(
@@ -80,8 +81,9 @@ const Civilian = () => {
           reason: selectedOptions.value,
           description: res,
           address: addressRef.current.value,
+          schoolName: schoolName.current.value,
         },
-        { merge: true },
+        { merge: true }
       )
       .then(() => {
         history.push("/");
@@ -96,18 +98,51 @@ const Civilian = () => {
       <div className="CivilianContainer">
         <img src={logo} alt="ASSIST Logo" className="logo" />
         <h1>Help Form</h1>
-        <p>Fill out the information below, so law enforcement can better assist you.</p>
+        <p>
+          Fill out the information below, so law enforcement can better assist
+          you.
+        </p>
         <br />
-        <input ref={studentName} className="registerInput" type="text" placeholder="Name" />
-        <input ref={schoolName} className="registerInput" type="text" placeholder="Teacher" />
-        <input ref={teacherName} className="registerInput" type="text" placeholder="School" />
-        <input ref={cityRef} className="registerInput" type="text" placeholder="City" value={city.current} />
-        <input ref={addressRef} className="registerInput" type="text" placeholder="Address" value={address.current} />
+        <input
+          ref={studentName}
+          className="registerInput"
+          type="text"
+          placeholder="Name"
+        />
+        <input
+          ref={schoolName}
+          className="registerInput"
+          type="text"
+          placeholder="Teacher"
+        />
+        <input
+          ref={teacherName}
+          className="registerInput"
+          type="text"
+          placeholder="School"
+        />
+        <input
+          ref={cityRef}
+          className="registerInput"
+          type="text"
+          placeholder="City"
+        />
+        <input
+          ref={addressRef}
+          className="registerInput"
+          type="text"
+          placeholder="Address"
+        />
         <p>Reason</p>
         <Select options={responses} onChange={handleChange} />
         <br />
         <p>Provide Brief Description</p>
-        <textarea ref={descriptionRef} cols="50" rows="10" placeholder="Type Description..."></textarea>
+        <textarea
+          ref={descriptionRef}
+          cols="50"
+          rows="10"
+          placeholder="Type Description..."
+        ></textarea>
         <button onClick={handleClick}>
           <p>Submit</p>
         </button>
