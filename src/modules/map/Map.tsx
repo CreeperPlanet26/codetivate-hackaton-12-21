@@ -10,18 +10,6 @@ export const Map = () => {
     zoom: 8,
   });
 
-  useEffect(() => {
-    // fetch all of the docs from the schools collection here
-    db.collection("dsfa")
-      .get()
-      .then((querySnapshot) => {
-        console.log("docs", querySnapshot.docs);
-        querySnapshot.forEach((doc) => {
-          console.log(doc.data());
-        });
-      });
-  }, []);
-
   return (
     <ReactMapGL
       {...viewport}
