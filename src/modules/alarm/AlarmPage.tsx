@@ -21,7 +21,7 @@ export default function App() {
 }
 
   const [loading, setLoading] = React.useState(false);
-  const [modelLabels, setModelLabels] = React.useState(false);
+  const [gunshotPrediction, setGunShotPrediction] = React.useState(false);
   const [results, setResults] = React.useState([createData("Gunshots", 0), createData("Backround Noise", 0)]);
 
   const URL = 'https://teachablemachine.withgoogle.com/models/rhU63TvgN/';
@@ -65,7 +65,12 @@ export default function App() {
               //const classPrediction = classLabels[i] + ': ' + result.scores[i].toFixed(2);
               resultsArray[i] = createData(classLabels[i], Math.floor(result.scores[i].toFixed(2)));
               let gunshotPrediction = Math.floor(1-result.scores[1].toFixed(2));
-            resultsArray[classLabels.length+1]= createData("Gunshot", gunshotPrediction)
+            resultsArray[classLabels.length+1]= createData("Gunshot", gunshotPrediction);
+          }
+          if(results[classLabels.length+1] > 75){
+            setGunShotPrediction(true);
+          } else{
+            setGunShotPrediction(false);
           }
           setResults(resultsArray);
           console.log(resultsArray);
@@ -78,7 +83,13 @@ export default function App() {
       });
       // setTimeout(() => recognizer.stopListening(), 5000);
   }
-
+    const gunshotDetectorComponent = () => {
+      if(gunshotPrediction){
+        return <p>Gunshot was heard. Contacting local law reinforcements!</p>
+      }else{
+        return <p></p>
+      }
+    }
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -147,7 +158,7 @@ export default function App() {
         </TableBody>
       </Table>
     </TableContainer>
-    
+    <gunshotDetectorComponent/>
   </Box>
     </div>
   );
