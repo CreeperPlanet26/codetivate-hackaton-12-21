@@ -10,7 +10,7 @@ export const Map = () => {
         zoom: 2,
     });
 
-    const schools = useRef<{
+    const [schools, setSchools] = useState<{
         reason: string;
         description: string[];
         time_posted: string;
@@ -22,13 +22,15 @@ export const Map = () => {
     }[]>([])
 
     useEffect(() => {
+
+        console.log("about to fetch")
         db
             .collection("schools")
             .get()
             //@ts-ignore
-            .then(s => s.forEach(d => schools.current.push(d.data())))
+            .then(s => s.forEach(d => setSchools(st => [...st, d.data()])))
 
-        console.log(schools)
+        console.log("done fetching", schools)
     }, [])
 
     return (
@@ -42,7 +44,7 @@ export const Map = () => {
             mapboxApiAccessToken="pk.eyJ1IjoiY3JlZXBlcnBsYW5ldDI2IiwiYSI6ImNreGR6Y2Q4ODB2dWoyb29rMWdyMWNyOWoifQ.qQBt2nMDmB9NGcytGCpP7Q"
         >
 
-            {schools.current.map(s => (
+            {schools.map(s => (
                 <Marker latitude={s.latLong.lat} longitude={s.latLong.long}>
                     <Pin />
                 </Marker>
