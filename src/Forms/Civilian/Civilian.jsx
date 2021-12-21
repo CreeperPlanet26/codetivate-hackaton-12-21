@@ -24,34 +24,32 @@ const Civilian = () => {
   const descriptionRef = React.useRef(null);
   const addressRef = React.useRef(null);
 
-  const [latLong, setLatLong] = React.useState("");
-  const address = React.useRef(null);
-  const city = React.useRef(null);
+  const latLong = React.useRef("");
+  const address = React.useRef("");
+  const city = React.useRef("");
 
   const getData = async () => {
     const { data } = await axios.get(
-      `http://api.positionstack.com/v1/reverse?access_key=9b3667b7b2f79edce871fb0f2368e5a7&query=${latLong.lat},${latLong.long}`
+      `http://api.positionstack.com/v1/reverse?access_key=9b3667b7b2f79edce871fb0f2368e5a7&query=${latLong.current.lat},${latLong.current.long}`,
     );
 
-    address.current.value = data.data[0].label;
-    city.current.value = data.data[0].locality;
+    address.current = data.data[0].label;
+    city.current = data.data[0].locality;
   };
 
   const today = new Date();
-  const time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
   React.useEffect(() => {
-    navigator.geolocation?.getCurrentPosition((pos) =>
-      setLatLong({
+    navigator.geolocation.getCurrentPosition((pos) => {
+      console.log(pos);
+      latLong.current = {
         lat: pos.coords.latitude,
         long: pos.coords.longitude,
-      })
-    );
-
-    console.log(latLong);
-
-    latLong && getData();
+      };
+      console.log(latLong.current);
+      getData();
+    });
   }, []);
 
   const [selectedOptions, setSelectedOptions] = React.useState([]);
@@ -75,7 +73,7 @@ const Civilian = () => {
       // .doc(studentName.current.value)
       .set(
         {
-          latLong: latLong,
+          latLong: latLong.current,
           name: studentName.current.value,
           time_posted: time,
           reason: selectedOptions.value,
@@ -83,7 +81,7 @@ const Civilian = () => {
           address: addressRef.current.value,
           schoolName: schoolName.current.value,
         },
-        { merge: true }
+        { merge: true },
       )
       .then(() => {
         history.push("/");
@@ -98,51 +96,18 @@ const Civilian = () => {
       <div className="CivilianContainer">
         <img src={logo} alt="ASSIST Logo" className="logo" />
         <h1>Help Form</h1>
-        <p>
-          Fill out the information below, so law enforcement can better assist
-          you.
-        </p>
+        <p>Fill out the information below, so law enforcement can better assist you.</p>
         <br />
-        <input
-          ref={studentName}
-          className="registerInput"
-          type="text"
-          placeholder="Name"
-        />
-        <input
-          ref={schoolName}
-          className="registerInput"
-          type="text"
-          placeholder="Teacher"
-        />
-        <input
-          ref={teacherName}
-          className="registerInput"
-          type="text"
-          placeholder="School"
-        />
-        <input
-          ref={cityRef}
-          className="registerInput"
-          type="text"
-          placeholder="City"
-        />
-        <input
-          ref={addressRef}
-          className="registerInput"
-          type="text"
-          placeholder="Address"
-        />
+        <input ref={studentName} className="registerInput" type="text" placeholder="Name" />
+        <input ref={schoolName} className="registerInput" type="text" placeholder="Teacher" />
+        <input ref={teacherName} className="registerInput" type="text" placeholder="School" />
+        <input ref={cityRef} className="registerInput" type="text" placeholder="City" value={city.current} />
+        <input ref={addressRef} className="registerInput" type="text" placeholder="Address" value={address.current} />
         <p>Reason</p>
         <Select options={responses} onChange={handleChange} />
         <br />
         <p>Provide Brief Description</p>
-        <textarea
-          ref={descriptionRef}
-          cols="50"
-          rows="10"
-          placeholder="Type Description..."
-        ></textarea>
+        <textarea ref={descriptionRef} cols="50" rows="10" placeholder="Type Description..."></textarea>
         <button onClick={handleClick}>
           <p>Submit</p>
         </button>
