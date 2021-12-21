@@ -12,19 +12,12 @@ export const Map = () => {
 
     useEffect(() => {
         // fetch all of the docs from the schools collection here
-        db.collection("schools").get().then((querySnapshot) => {
+        db.collection("some_name").get().then((querySnapshot) => {
             console.log("docs", querySnapshot.docs)
             querySnapshot.forEach((doc) => {
                 console.log(doc.data());
             });
         });
-
-        // db.collection("officers").get().then((querySnapshot) => {
-        //     console.log("docs", querySnapshot.docs)
-        //     querySnapshot.forEach((doc) => {
-        //         console.log(doc.data().name);
-        //     });
-        // });
     }, []);
 
     return (

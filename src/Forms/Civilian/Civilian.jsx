@@ -66,7 +66,7 @@ const Civilian = () => {
           name: studentName.current.value,
           time_posted: time,
           reason: selectedOptions.value,
-          description: descriptionRef.current.value,
+          description: chunks,
         },
         { merge: true },
       )
