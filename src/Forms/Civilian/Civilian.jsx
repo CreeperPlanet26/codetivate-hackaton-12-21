@@ -22,22 +22,35 @@ const Civilian = () => {
   const teacherName = React.useRef(null);
   const cityRef = React.useRef(null);
   const descriptionRef = React.useRef(null);
-  const stateRef = React.useRef(null);
+  const addressRef = React.useRef(null);
 
   const [latLong, setLatLong] = React.useState("");
-  const [state, setState] = React.useState("");
+  const address = React.useRef(null);
+  const city = React.useRef(null);
 
   const getData = async () => {
-    const res = await axios.get("https://geolocation-db.com/json/");
-    setLatLong({ lat: res.data.latitude, long: res.data.longitude });
-    setState(res.data.state);
+    const { data } = await axios.get(
+      `http://api.positionstack.com/v1/reverse?access_key=9b3667b7b2f79edce871fb0f2368e5a7&query=${latLong.lat},${latLong.long}`,
+    );
+
+    address.current = data.data[0].label;
+    city.current = data.data[0].locality;
   };
 
   const today = new Date();
   const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
   React.useEffect(() => {
-    getData();
+    navigator.geolocation?.getCurrentPosition((pos) =>
+      setLatLong({
+        lat: pos.coords.latitude,
+        long: pos.coords.longitude,
+      }),
+    );
+
+    console.log(latLong);
+
+    latLong && getData();
   }, []);
 
   const [selectedOptions, setSelectedOptions] = React.useState([]);
@@ -66,6 +79,7 @@ const Civilian = () => {
           time_posted: time,
           reason: selectedOptions.value,
           description: res,
+          address: addressRef.current.value,
         },
         { merge: true },
       )
@@ -87,8 +101,8 @@ const Civilian = () => {
         <input ref={studentName} className="registerInput" type="text" placeholder="Name" />
         <input ref={schoolName} className="registerInput" type="text" placeholder="Teacher" />
         <input ref={teacherName} className="registerInput" type="text" placeholder="School" />
-        <input ref={cityRef} className="registerInput" type="text" placeholder="City" />
-        <input ref={stateRef} className="registerInput" type="text" placeholder="State" value={state} />
+        <input ref={cityRef} className="registerInput" type="text" placeholder="City" value={city.current} />
+        <input ref={addressRef} className="registerInput" type="text" placeholder="Address" value={address.current} />
         <p>Reason</p>
         <Select options={responses} onChange={handleChange} />
         <br />

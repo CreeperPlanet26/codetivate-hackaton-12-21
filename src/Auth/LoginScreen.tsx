@@ -35,6 +35,9 @@ function LoginScreen() {
           className="loginInput"
           type="password"
           placeholder="Password"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") signIn(e)
+          }}
           ref={passwordRef}
         />
         <button className="loginButton" onClick={signIn}>
