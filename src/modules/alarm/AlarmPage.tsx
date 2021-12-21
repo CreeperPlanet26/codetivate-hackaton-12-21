@@ -64,7 +64,7 @@ export default function App() {
           for (let i = 0; i < classLabels.length; i++) {
               //const classPrediction = classLabels[i] + ': ' + result.scores[i].toFixed(2);
               resultsArray[i] = createData(classLabels[i], result.scores[i].toFixed(2));
-              let gunshotPrediction = Math.floor(1-result.scores[1].toFixed(2));
+              let gunshotPrediction = 1-result.scores[1].toFixed(2);
             resultsArray[classLabels.length+1]= createData("Gunshot", gunshotPrediction)
           }
           setResults(resultsArray);
