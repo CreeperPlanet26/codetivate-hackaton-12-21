@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import ReactMapGL, { Marker } from "react-map-gl";
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import { db } from "../../firebase";
-import Pin from "./Pin";
+import Pins from "./Pins";
 
 export const Map = () => {
     const [viewport, setViewport] = useState({
@@ -9,6 +9,9 @@ export const Map = () => {
         longitude: -122.4376,
         zoom: 2,
     });
+
+
+    const [popupInfo, setPopupInfo] = useState(null);
 
     const [schools, setSchools] = useState<{
         reason: string;
@@ -21,16 +24,22 @@ export const Map = () => {
         }
     }[]>([])
 
+
     useEffect(() => {
+        const temp = [];
 
         console.log("about to fetch")
         db
             .collection("schools")
             .get()
             //@ts-ignore
-            .then(s => s.forEach(d => setSchools(st => [...st, d.data()])))
+            .then(s => {
+                s.forEach(d => temp.push(d.data()))
+                setSchools(temp)
+                console.log("done fetching", schools)
+            })
 
-        console.log("done fetching", schools)
+
     }, [])
 
     return (
@@ -44,12 +53,24 @@ export const Map = () => {
             mapboxApiAccessToken="pk.eyJ1IjoiY3JlZXBlcnBsYW5ldDI2IiwiYSI6ImNreGR6Y2Q4ODB2dWoyb29rMWdyMWNyOWoifQ.qQBt2nMDmB9NGcytGCpP7Q"
         >
 
-            {schools.map(s => (
-                <Marker latitude={s.latLong.lat} longitude={s.latLong.long}>
-                    <Pin />
-                </Marker>
-            ))}
+            {/* {schools.map(s => ( */}
+            <>
+                {/* <Pins schools={schools} onClick={setPopupInfo} />
 
-        </ReactMapGL>
+                    <Popup
+                        tipSize={5}
+                        anchor="top"
+                        longitude={s.latLong.lat}
+                        latitude={s.latLong.long}
+                        closeOnClick={false}
+                        onClose={setPopupInfo}
+                    > <p>{s.name}</p> */}
+                {/* </Popup> */}
+
+            </>
+            {/* )) */}
+            {/* } */}
+
+        </ReactMapGL >
     );
 };
