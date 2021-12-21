@@ -50,12 +50,11 @@ const Civilian = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    // this chunks thing doesn't work so i went back and used the raw description
     let chunks = descriptionRef.current.value.split(/\ ?\-\ ?/);
+    if (chunks.length === 0) {
+      alert("Follow the proper format! \n- foo \n- bar");
+    }
     chunks = chunks.slice(1);
-
-    console.log(chunks);
-
     const res = chunks.map((str) => str.replaceAll("\n", ""));
     db.collection("schools")
       .doc(schoolName.current.value)
@@ -67,7 +66,7 @@ const Civilian = () => {
           name: studentName.current.value,
           time_posted: time,
           reason: selectedOptions.value,
-          description: chunks,
+          description: res,
         },
         { merge: true }
       )
