@@ -120,6 +120,7 @@ export default function AlarmPage() {
       {/* </form> */}
       <br/>
 
+      <hr/>
       <List
       sx={{ width: '100%', maxWidth: 3600, bgcolor: 'background.paper' }}
       aria-label="contacts"
@@ -167,6 +168,7 @@ export default function AlarmPage() {
           <ListItemText inset primary={predictions.prediction9} />
         </ListItemButton>
       </ListItem>
+      
     </List>
     </div>
   );
