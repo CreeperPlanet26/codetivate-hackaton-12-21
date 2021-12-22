@@ -10,6 +10,8 @@ const SIZE = 20;
 
 function Pins({ schools, onClick }) {
 
+    console.log('these are the schools from the pins component', schools)
+
     return schools.map((s, index) => (
         <Marker key={`marker-${index}`} longitude={s.latLong.long} latitude={s.latLong.lat}>
             <svg
