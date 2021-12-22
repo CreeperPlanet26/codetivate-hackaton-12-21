@@ -7,16 +7,17 @@ const PoliceDashboard = () => {
 
   return (
     <div className="police-dashboard-component">
-      <Map />
       <button
         onClick={() =>
           auth.signOut().then(() => {
             history.push("/");
           })
         }
+        className="sign-out-button"
       >
-        SignOut
+        Sign Out
       </button>
+      <Map />
     </div>
   );
 };
