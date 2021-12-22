@@ -111,14 +111,15 @@ export default function App() {
               //const classPrediction = classLabels[i] + ': ' + result.scores[i].toFixed(2);
               resultsArray[i] = createData(classLabels[i], result.scores[i].toFixed(2));
               let gunshotPrediction = 1-result.scores[1].toFixed(2);
-              if(gunshotPrediction > 0.5){
-                handleClick()
-              }
+              
             resultsArray[classLabels.length+1]= createData("Gunshot", gunshotPrediction)
           }
           setResults(resultsArray);
           console.log(resultsArray);
           console.log(results);
+          if(gunshotPrediction > 0.5){
+            handleClick()
+          }
       }, {
           includeSpectrogram: true, // in case listen should return result.spectrogram
           probabilityThreshold: 0.75,
