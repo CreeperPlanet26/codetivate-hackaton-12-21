@@ -169,12 +169,9 @@ export const Map = () => {
         <button
           className="button"
           onClick={() => {
-            db.collection("police_locs")
-              .doc()
-              .set({
-                name: officerNameRef.current.value,
-                eta: etaRef.current.value,
-              });
+            db.collection("police_locs").doc(officerNameRef.current.value).set({
+              eta: etaRef.current.value,
+            });
           }}
         >
           Submit
