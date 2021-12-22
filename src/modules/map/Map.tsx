@@ -100,7 +100,29 @@ export const Map = () => {
                 mapboxApiAccessToken="pk.eyJ1IjoiY3JlZXBlcnBsYW5ldDI2IiwiYSI6ImNreGR6Y2Q4ODB2dWoyb29rMWdyMWNyOWoifQ.qQBt2nMDmB9NGcytGCpP7Q"
             >
                 {canRender && <Pins schools={schools} onClick={setPopupInfo} />}
-
+                {canRender && popupInfo &&
+                    <div className="map-pin-popup">
+                        <Popup
+                            tipSize={5}
+                            anchor="top"
+                            longitude={popupInfo.latLong.long}
+                            latitude={popupInfo.latLong.lat}
+                            closeOnClick={false}
+                            onClose={setPopupInfo}
+                        >
+                            Name: {popupInfo.name}
+                            <br />
+                            Address: {popupInfo.address}
+                            <br />
+                            School: {popupInfo.school}
+                            <br />
+                            Reason: {popupInfo.reason}
+                            <br />
+                            Description: {popupInfo.description}
+                            <br />
+                        </Popup>
+                    </div>
+                }
 
             </ReactMapGL>
             <TableContainer component={Paper}>
