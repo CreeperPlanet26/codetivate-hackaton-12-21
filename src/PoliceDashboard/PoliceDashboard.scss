@@ -5,3 +5,14 @@
   flex-direction: column;
   height: 100vh;
 }
+
+.sign-out-button {
+  width: 10em;
+  height: 3em;
+  background-color: rgb(255, 0, 0);
+  outline: none;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  margin-bottom: 2vh;
+}

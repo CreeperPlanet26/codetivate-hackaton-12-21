@@ -153,8 +153,12 @@ export const Map = () => {
       </div>
       <div className="form">
         <h2>Location Tracker</h2>
-        <input type="text" placeholder="Name" />
-        <input type="text" placeholder="ETA" />
+        <span>
+          Enter the below information for students to track your location
+        </span>
+        <input className="input" type="text" placeholder="Name" />
+        <input className="input" type="text" placeholder="ETA" />
+        <button className="button">Submit</button>
       </div>
     </div>
   );
