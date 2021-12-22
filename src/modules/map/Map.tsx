@@ -188,7 +188,7 @@ export const Map = () => {
       </div>
     </div>
   );
-=======
+
     return (
         <>
             <ReactMapGL
