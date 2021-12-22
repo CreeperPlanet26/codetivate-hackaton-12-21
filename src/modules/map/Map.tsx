@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ReactMapGL, { Popup } from "react-map-gl";
 import { db } from "../../firebase";
 import Pins from "./Pins";
@@ -21,6 +21,9 @@ export const Map = () => {
   const [popupInfo, setPopupInfo] = useState(null);
 
   const [rows, setRows] = useState([]);
+
+  const officerNameRef = useRef(null);
+  const etaRef = useRef(null);
 
   const [schools, setSchools] = useState<
     {
@@ -156,9 +159,26 @@ export const Map = () => {
         <span>
           Enter the below information for students to track your location
         </span>
-        <input className="input" type="text" placeholder="Name" />
-        <input className="input" type="text" placeholder="ETA" />
-        <button className="button">Submit</button>
+        <input
+          className="input"
+          type="text"
+          placeholder="Name"
+          ref={officerNameRef}
+        />
+        <input className="input" type="text" placeholder="ETA" ref={etaRef} />
+        <button
+          className="button"
+          onClick={() => {
+            db.collection("police_locs")
+              .doc()
+              .set({
+                name: officerNameRef.current.value,
+                eta: etaRef.current.value,
+              });
+          }}
+        >
+          Submit
+        </button>
       </div>
     </div>
   );
