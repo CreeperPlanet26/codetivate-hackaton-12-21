@@ -59,20 +59,29 @@ export const Map = () => {
 
             {canRender && <Pins schools={schools} onClick={setPopupInfo} />}
 
-            {canRender && popupInfo && schools.map((s) => (
-                <>
+            {canRender && popupInfo &&
+                <div className="map-pin-popup">
                     <Popup
                         tipSize={5}
                         anchor="top"
-                        longitude={s.latLong.long}
-                        latitude={s.latLong.lat}
+                        longitude={popupInfo.latLong.long}
+                        latitude={popupInfo.latLong.lat}
                         closeOnClick={false}
                         onClose={setPopupInfo}
                     >
-                        <p>{popupInfo.name}</p>
+                        Name: {popupInfo.name}
+                        <br />
+                        Address: {popupInfo.address}
+                        <br />
+                        School: {popupInfo.school}
+                        <br />
+                        Reason: {popupInfo.reason}
+                        <br />
+                        Description: {popupInfo.description}
+                        <br />
                     </Popup>
-                </>
-            ))}
+                </div>
+            }
         </ReactMapGL>
     );
 };
