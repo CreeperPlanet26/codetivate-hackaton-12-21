@@ -49,8 +49,17 @@
     outline: none;
     border: none;
     font-family: "Work Sans", sans-serif;
+    color:black,
   }
 
+  input.registerInput::placeholder{
+    color: black;
+    opacity: 1;
+  }
+  textarea.registerTextArea::placeholder{
+    color: black;
+    opacity: 1;
+  }
   .css-6j8wv5-Input > input {
     height: 5vh;
     width: 30vw;
@@ -90,5 +99,6 @@
     outline: none;
     border-radius: 8px;
     font-family: "Work Sans", sans-serif;
+    color:black,
   }
 }

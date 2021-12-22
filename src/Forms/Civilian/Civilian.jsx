@@ -109,7 +109,7 @@ const Civilian = () => {
         <Select options={responses} onChange={handleChange} />
         <br />
         <p>Provide Brief Description</p>
-        <textarea ref={descriptionRef} cols="50" rows="10" placeholder="Type Description..."></textarea>
+        <textarea ref={descriptionRef} cols="50" rows="10" className="registerTextArea" placeholder="Type Description..."></textarea>
         <button onClick={handleClick}>
           <p>Submit</p>
         </button>

@@ -74,3 +74,7 @@
   cursor: pointer;
   font-family: "Work Sans", sans-serif;
 }
+input.registerInput::placeholder{
+  color: black;
+  opacity: 1;
+}

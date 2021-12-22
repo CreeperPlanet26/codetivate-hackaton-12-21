@@ -41,6 +41,7 @@
   outline: none;
   border: none;
   font-family: "Work Sans", sans-serif;
+  color:black;
 }
 
 .loginButton {
@@ -73,4 +74,8 @@
   color: #2e5090;
   cursor: pointer;
   font-family: "Work Sans", sans-serif;
+}
+input.loginInput::placeholder{
+  color: black;
+  opacity: 1;
 }
