@@ -33,8 +33,6 @@ export const Map = () => {
             .then((s) => {
                 //@ts-ignore
                 s.forEach((d) => {
-                    //@ts-ignore
-
                     console.log(d.data())
 
                     //@ts-ignore
@@ -61,21 +59,20 @@ export const Map = () => {
 
             {canRender && <Pins schools={schools} onClick={setPopupInfo} />}
 
-            {/* {canRender && schools.map((s) => (
+            {canRender && popupInfo && schools.map((s) => (
                 <>
-
                     <Popup
                         tipSize={5}
                         anchor="top"
-                        longitude={s.latLong.lat}
-                        latitude={s.latLong.long}
+                        longitude={s.latLong.long}
+                        latitude={s.latLong.lat}
                         closeOnClick={false}
                         onClose={setPopupInfo}
                     >
-                        <p>{s.name}</p>
+                        <p>{popupInfo.name}</p>
                     </Popup>
                 </>
-            ))} */}
+            ))}
         </ReactMapGL>
     );
 };
