@@ -13,6 +13,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { db } from "../../firebase";
+import axios from "axios";
 
 export default function App() {
   function createData(name, probability) {
@@ -23,17 +25,61 @@ export default function App() {
   const [loading, setLoading] = React.useState(false);
   const [modelLabels, setModelLabels] = React.useState(false);
   const [results, setResults] = React.useState([createData("Gunshots", 0), createData("Backround Noise", 0)]);
+  const addressRef = React.useRef(null);
 
+  const latLong = React.useRef("");
+  const address = React.useRef("");
+  const city = React.useRef("");
   const URL = 'https://teachablemachine.withgoogle.com/models/rhU63TvgN/';
 
-  function handleClick() {
-    setLoading(!loading);
-    ModelInit()
-  }
+  const getData = async () => {
+    const { data } = await axios.get(
+      `http://api.positionstack.com/v1/reverse?access_key=9b3667b7b2f79edce871fb0f2368e5a7&query=${latLong.current.lat},${latLong.current.long}`,
+    );
 
-  const rows = [
-    
-];
+    console.log(latLong.current, address.current, city.current);
+
+    addressRef.current.value = data.data[0].label;
+    cityRef.current.value = data.data[0].locality;
+  };
+
+  const today = new Date();
+  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+  React.useEffect(() => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      console.log(pos);
+      latLong.current = {
+        lat: pos.coords.latitude,
+        long: pos.coords.longitude,
+      };
+      console.log(latLong.current);
+      getData();
+    });
+  }, []);
+
+  const handleClick = () => {
+    db.collection("schools")
+      .doc(time)
+      // .collection(selectedOptions.value)
+      // .doc(studentName.current.value)
+      .set(
+        {
+          latLong: latLong.current,
+          name: studentName.current.value,
+          time_posted: time,
+          reason: "Shooter Alarm Activated",
+          address: addressRef.current.value,
+        },
+        { merge: true },
+      )
+      .then(() => {
+        console.log('alarm activated')
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const createModel = async () => {
       const checkpointURL = URL + 'model.json'; // model topology
@@ -65,6 +111,9 @@ export default function App() {
               //const classPrediction = classLabels[i] + ': ' + result.scores[i].toFixed(2);
               resultsArray[i] = createData(classLabels[i], result.scores[i].toFixed(2));
               let gunshotPrediction = 1-result.scores[1].toFixed(2);
+              if(gunshotPrediction > 0.5){
+                handleClick()
+              }
             resultsArray[classLabels.length+1]= createData("Gunshot", gunshotPrediction)
           }
           setResults(resultsArray);
