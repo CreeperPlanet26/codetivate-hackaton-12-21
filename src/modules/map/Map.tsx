@@ -80,7 +80,7 @@ export const Map = () => {
             );
           })
         );
-
+      
         console.log("done fetching", schools);
         setCanRender(true);
       });
@@ -101,21 +101,7 @@ export const Map = () => {
       >
         {canRender && <Pins schools={schools} onClick={setPopupInfo} />}
 
-        {/* {canRender && schools.map((s) => (
-                <>
-
-                    <Popup
-                        tipSize={5}
-                        anchor="top"
-                        longitude={s.latLong.lat}
-                        latitude={s.latLong.long}
-                        closeOnClick={false}
-                        onClose={setPopupInfo}
-                    >
-                        <p>{s.name}</p>
-                    </Popup>
                 </>
-            ))} */}
       </ReactMapGL>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -150,4 +136,8 @@ export const Map = () => {
       </TableContainer>
     </>
   );
+                </div>
+            }
+        </ReactMapGL>
+    );
 };
