@@ -22,4 +22,13 @@
   background: red;
   border-radius: 50px;
 }
+
+.policeDashboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.inner {
+  display: flex;
+}
 // }
