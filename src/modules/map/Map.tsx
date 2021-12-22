@@ -180,6 +180,7 @@ export const Map = () => {
           onClick={() => {
             db.collection("police_locs").doc(officerNameRef.current.value).set({
               eta: etaRef.current.value,
+              name: officerNameRef.current.value
             });
           }}
         >
