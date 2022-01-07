@@ -11,6 +11,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./Map.scss";
 
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+
 export const Map = () => {
     const [viewport, setViewport] = useState({
         latitude: 37.7577,
